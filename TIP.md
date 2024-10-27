@@ -5,7 +5,8 @@
 2. 运行 `alembic revision --autogenerate -m "add secrets"`
 3. 运行 `alembic upgrade head`
 4. 可以看到多了一个表
-
+5. 下载 http://127.0.0.1:8000/api/v1/openapi.json
+6. `yarn generate-client` 重新生成 client
 
 
 
