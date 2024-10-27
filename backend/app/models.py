@@ -44,6 +44,8 @@ class User(UserBase, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     hashed_password: str
     items: list["Item"] = Relationship(back_populates="owner", cascade_delete=True)
+    user_tokens: list["Secret"] = Relationship(back_populates="owner", cascade_delete=True)  # Add this line
+
 
 
 # Properties to return via API, id is always required
@@ -112,3 +114,44 @@ class TokenPayload(SQLModel):
 class NewPassword(SQLModel):
     token: str
     new_password: str = Field(min_length=8, max_length=40)
+
+
+
+
+# Shared properties
+class SecretBase(SQLModel):
+    title: str = Field(min_length=1, max_length=255)
+    description: str | None = Field(default=None, max_length=255)
+
+
+# Properties to receive on item creation
+class SecretCreate(SecretBase):
+    pass
+
+
+# Properties to receive on item update
+class SecretUpdate(SecretBase):
+    title: str | None = Field(default=None, min_length=1, max_length=255)  # type: ignore
+
+
+# Database model, database table inferred from class name
+class Secret(SecretBase, table=True):
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
+    title: str = Field(max_length=255)
+    owner_id: uuid.UUID = Field(
+        foreign_key="user.id", nullable=False, ondelete="CASCADE"
+    )
+    owner: User | None = Relationship(back_populates="user_tokens")
+
+
+# Properties to return via API, id is always required
+class SecretPublic(SecretBase):
+    id: uuid.UUID
+    owner_id: uuid.UUID
+
+
+class SecretsPublic(SQLModel):
+    data: list[SecretPublic]
+    count: int
+
+

@@ -23,6 +23,13 @@ dependencies = [
     "pyjwt<3.0.0,>=2.8.0",
 ]
 
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = ""
+authors = ["liuf <liuf@kubesphere.io>"]
+readme = "README.md"
+
 [tool.uv]
 dev-dependencies = [
     "pytest<8.0.0,>=7.4.3",

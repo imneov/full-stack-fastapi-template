@@ -97,3 +97,26 @@ export type ValidationError = {
   msg: string
   type: string
 }
+
+
+export type SecretCreate = {
+  title: string
+  description?: string | null
+}
+
+export type SecretPublic = {
+  title: string
+  description?: string | null
+  id: string
+  owner_id: string
+}
+
+export type SecretUpdate = {
+  title?: string | null
+  description?: string | null
+}
+
+export type SecretsPublic = {
+  data: Array<ItemPublic>
+  count: number
+}

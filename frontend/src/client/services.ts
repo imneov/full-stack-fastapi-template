@@ -18,6 +18,10 @@ import type {
   ItemPublic,
   ItemsPublic,
   ItemUpdate,
+  SecretCreate,
+  SecretPublic,
+  SecretsPublic,
+  SecretUpdate
 } from "./models"
 
 export type TDataLoginAccessToken = {
@@ -518,6 +522,117 @@ export class ItemsService {
     return __request(OpenAPI, {
       method: "DELETE",
       url: "/api/v1/items/{id}",
+      path: {
+        id,
+      },
+      errors: {
+        422: `Validation Error`,
+      },
+    })
+  }
+}
+
+
+export class SecretsService {
+  /**
+   * Read Secrets
+   * Retrieve secrets.
+   * @returns SecretsPublic Successful Response
+   * @throws ApiError
+   */
+  public static readSecrets(
+    data: TDataReadItems = {},
+  ): CancelablePromise<SecretsPublic> {
+    const { limit = 100, skip = 0 } = data
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/secrets/",
+      query: {
+        skip,
+        limit,
+      },
+      errors: {
+        422: `Validation Error`,
+      },
+    })
+  }
+
+  /**
+   * Create Secret
+   * Create new secret.
+   * @returns SecretPublic Successful Response
+   * @throws ApiError
+   */
+  public static createSecret(
+    data: TDataCreateItem,
+  ): CancelablePromise<SecretPublic> {
+    const { requestBody } = data
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/secrets/",
+      body: requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: `Validation Error`,
+      },
+    })
+  }
+
+  /**
+   * Read Secret
+   * Get secret by ID.
+   * @returns SecretPublic Successful Response
+   * @throws ApiError
+   */
+  public static readSecret(data: TDataReadItem): CancelablePromise<SecretPublic> {
+    const { id } = data
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/secrets/{id}",
+      path: {
+        id,
+      },
+      errors: {
+        422: `Validation Error`,
+      },
+    })
+  }
+
+  /**
+   * Update Secret
+   * Update an secret.
+   * @returns SecretPublic Successful Response
+   * @throws ApiError
+   */
+  public static updateSecret(
+    data: TDataUpdateItem,
+  ): CancelablePromise<SecretPublic> {
+    const { id, requestBody } = data
+    return __request(OpenAPI, {
+      method: "PUT",
+      url: "/api/v1/secrets/{id}",
+      path: {
+        id,
+      },
+      body: requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: `Validation Error`,
+      },
+    })
+  }
+
+  /**
+   * Delete Secret
+   * Delete an secret.
+   * @returns Message Successful Response
+   * @throws ApiError
+   */
+  public static deleteSecret(data: TDataDeleteItem): CancelablePromise<Message> {
+    const { id } = data
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/secrets/{id}",
       path: {
         id,
       },
