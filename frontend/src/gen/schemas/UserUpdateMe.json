@@ -1,0 +1,1 @@
+{"properties":{"full_name":{"anyOf":[{"type":"string","maxLength":255},{"type":"null"}],"title":"Full Name"},"email":{"anyOf":[{"type":"string","maxLength":255,"format":"email"},{"type":"null"}],"title":"Email"}},"type":"object","title":"UserUpdateMe","x-readme-ref-name":"UserUpdateMe"}

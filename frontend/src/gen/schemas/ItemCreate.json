@@ -1,0 +1,1 @@
+{"properties":{"title":{"type":"string","maxLength":255,"minLength":1,"title":"Title"},"description":{"anyOf":[{"type":"string","maxLength":255},{"type":"null"}],"title":"Description"}},"type":"object","required":["title"],"title":"ItemCreate","x-readme-ref-name":"ItemCreate"}
