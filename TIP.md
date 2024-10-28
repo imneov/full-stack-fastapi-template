@@ -9,6 +9,20 @@
 6. `yarn generate-client` 重新生成 client
 
 
+## 生成代码
+
+```
+cd <project>/
+cd backend
+poetry shell
+nvm use 20
+cd ..
+source scripts/generate-client.sh > 1.txt 2>&1
+```
+
+
+
+
 
 
 # Mac can not install psycopg-binary==3.2.1 (MAC 13.5.1 (22G90) M1) #2600
